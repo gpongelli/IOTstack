@@ -1,0 +1,8 @@
+  unifi:
+    container_name: Unifi-Config
+    restart: unless-stopped
+    image: jacobalberty/unifi:arm32v7-beta
+    network_mode: host
+    volumes:
+      - ./volumes/unifi:/unifi
+      - /etc/localtime:/etc/localtime:ro
