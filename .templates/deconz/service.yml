@@ -1,0 +1,13 @@
+  deconz:
+    container_name: Deconz
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    image: marthoc/deconz:armhf
+    environment:
+      - DECONZ_VNC_MODE=1
+      - DECONZ_VNC_PASSWORD=password
+    volumes:
+      - ./volumes/deconz/otau:/root/otau
+      - ./volumes/deconz:/root/.local/share/dresden-elektronik/deCONZ
+      - /etc/localtime:/etc/localtime:ro
