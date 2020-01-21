@@ -13,7 +13,7 @@ data = f.read()
 
 arr = json.loads(data)
 
-otapath = '/srv/deconz/otau'
+otapath = './otau'
 
 if not os.path.exists(otapath):
         os.makedirs(otapath)
