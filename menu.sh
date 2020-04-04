@@ -10,6 +10,7 @@ declare -A cont_array=(
 	[telegraf]="Telegraf (Requires InfluxDB and Mosquitto)"
 	[duplicati]="duplicati"
 	[homeassistant]="homeassistant"
+	[transmission]="transmission"
 	[grafana]="Grafana"
 	[mosquitto]="Eclipse-Mosquitto"
 	[postgres]="Postgres"
@@ -32,8 +33,8 @@ declare -A cont_array=(
 	[python]="Python 3"
 
 )
-declare -a armhf_keys=("portainer" "nodered" "influxdb" "grafana" "mosquitto" "telegraf" "duplicati" "homeassistant" "mariadb" "postgres"
-	"adminer" "openhab" "zigbee2mqtt" "pihole" "plex" "tasmoadmin" "rtl_433" "espruinohub"
+declare -a armhf_keys=("portainer" "nodered" "influxdb" "grafana" "mosquitto" "telegraf" "duplicati" "homeassistant" "transmission" 
+    "mariadb" "postgres" "adminer" "openhab" "zigbee2mqtt" "pihole" "plex" "tasmoadmin" "rtl_433" "espruinohub"
 	"motioneye" "webthings_gateway" "blynk_server" "nextcloud" "diyhue" "homebridge" "python")
 
 sys_arch=$(uname -m)
@@ -117,6 +118,9 @@ function yml_builder() {
 
 	#if an env file exists check for timezone
 	[ -f "./services/$1/$1.env" ] && timezones ./services/$1/$1.env
+
+    # if a volumes.yml exists, append to overall volumes.yml file
+    [ -f "./services/$1/volumes.yml" ] && cat "./services/$1/volumes.yml" >> docker-volumes.yml
 
 	#add new line then append service
 	echo "" >>docker-compose.yml
@@ -260,6 +264,14 @@ case $mainmenu_selection in
 					yml_builder "$container"
 				done
 			fi
+		fi
+		
+		# if a container needs volume, put it at the end of docker-compose
+		if [ -f docker-volumes.yml ]; then
+			echo "" >> docker-compose.yml
+			echo "volumes:" >> docker-compose.yml
+			cat docker-volumes.yml >> docker-compose.yml
+			rm docker-volumes.yml
 		fi
 
 		echo "docker-compose successfully created"
