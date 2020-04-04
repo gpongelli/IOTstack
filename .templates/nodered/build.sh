@@ -16,6 +16,8 @@ node_selection=$(whiptail --title "Node-RED nodes" --checklist --separate-output
 	"node-red-node-darksky" " " "OFF" \
 	"node-red-node-sqlite" " " "OFF" \
 	"node-red-contrib-influxdb" " " "ON" \
+	"node-red-contrib-home-assistant-websocket" " " "ON" \
+	"node-red-contrib-telegrambot" " " "ON" \
 	"node-red-contrib-config" " " "OFF" \
 	"node-red-contrib-grove" " " "OFF" \
 	"node-red-contrib-diode" " " "OFF" \
