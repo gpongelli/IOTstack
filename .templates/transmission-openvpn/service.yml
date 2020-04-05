@@ -1,0 +1,39 @@
+
+  transmission-openvpn:
+    volumes:
+      - transm_ovpn_volume:/data
+      - '/etc/localtime:/etc/localtime:ro'
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Rome
+      - CREATE_TUN_DEVICE=true
+      - OPENVPN_PROVIDER=FREEVPN
+      - OPENVPN_CONFIG=me-UDP40000
+      - OPENVPN_USERNAME=freevpn.me
+      - DNS=192.168.160.1
+      #- OPENVPN_USERNAME=user
+      #- OPENVPN_PASSWORD=pass
+      - WEBPROXY_ENABLED=false
+      - LOCAL_NETWORK=192.168.0.0/16
+      - OPENVPN_OPTS=--inactive 36000 --ping 100 --ping-exit 600 --tun-mtu 1500
+    cap_add:
+      - NET_ADMIN
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    ports:
+      - 10091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    image: gp/ovpn
+    container_name: transmission-openvpn
+    devices:
+      - "/dev/net/tun"
+    restart: always
+        # PIHOLE&unbound in raspberry, gw del container -> IPAM gw
+        #dns:
+        #    - 172.28.0.1
+        #command:
+        #    - "/etc/openvn/updateFreeVPN.sh"
