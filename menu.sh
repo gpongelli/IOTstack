@@ -16,6 +16,7 @@ declare -A cont_array=(
 	[mosquitto]="Eclipse-Mosquitto"
 	[postgres]="Postgres"
 	[timescaledb]="Timescaledb"
+    [timescaledb-postgis]="Timescaledb-postgis"
 	[mariadb]="MariaDB (MySQL fork)"
 	[adminer]="Adminer"
 	[openhab]="openHAB"
@@ -36,7 +37,7 @@ declare -A cont_array=(
 
 )
 declare -a armhf_keys=("portainer" "nodered" "influxdb" "grafana" "mosquitto" "telegraf" "duplicati" "homeassistant" "transmission" 
-    "transmission-openvpn" "mariadb" "postgres" "timescaledb" "adminer" "openhab" "zigbee2mqtt" "pihole" "plex" "tasmoadmin" "rtl_433" "espruinohub"
+    "transmission-openvpn" "mariadb" "postgres" "timescaledb" "timescaledb-postgis" "adminer" "openhab" "zigbee2mqtt" "pihole" "plex" "tasmoadmin" "rtl_433" "espruinohub"
 	"motioneye" "webthings_gateway" "blynk_server" "nextcloud" "diyhue" "homebridge" "python")
 
 sys_arch=$(uname -m)

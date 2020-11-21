@@ -1,0 +1,10 @@
+  timescaledb-postgis:
+    container_name: timescaledb-postgis
+    image: dekiesel/timescaledb-postgis:1.7.4-pg12
+    restart: unless-stopped
+    env_file:
+      - ./services/timescale-gis/timescaledb.env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./volumes/timescale-gis/data:/var/lib/postgresql/data
