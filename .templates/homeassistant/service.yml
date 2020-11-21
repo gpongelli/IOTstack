@@ -1,6 +1,6 @@
   homeassistant:
     container_name: home-assistant
-    image: homeassistant/raspberrypi4-homeassistant
+    image: homeassistant/raspberrypi4-homeassistant:stable
     volumes:
       - ./volumes/homeassistant:/config
     environment:
