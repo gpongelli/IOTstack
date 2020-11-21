@@ -1,0 +1,6 @@
+  pg_admin:
+    container_name: pgAdmin
+    image: biarms/pgadmin4
+    restart: unless-stopped
+    ports:
+      - 9180:5050
